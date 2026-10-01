@@ -1,0 +1,65 @@
+﻿"ID","Area","SpecFile","TestName","Type","Priority","Preconditions","Steps","TestData","ExpectedResult","Automated","Status"
+"TC-H01","Homepage","home.spec.ts","loads and exposes Contact Us within Test Automation Challenges","Smoke","High","Browser open; network available","1. Navigate to https://www.webdriveruniversity.com/
+2. Verify brand link, Test Automation Challenges, Contact Us tile
+3. Verify Contact Us href and target=_blank","N/A","Homepage loads; Contact Us tile visible, enabled, href ends with Contact-Us/contactus.html, target=_blank","Yes","Pass"
+"TC-N01","Navigation","contact-us-navigation.spec.ts","opens Contact Us in a new tab from the homepage","Functional","High","Homepage accessible","1. Open homepage
+2. Click Contact Us tile
+3. Capture new tab
+4. Verify original tab URL and new tab Contact Us page","N/A","New tab opens to Contact Us; homepage tab remains; Contact Us form loaded","Yes","Pass"
+"TC-F01","Functional","contact-us-functional.spec.ts","form structure exposes required controls","Structural","High","Contact Us page open (beforeEach)","1. Open Contact Us
+2. Assert FN/LN/Email/Comments editable
+3. Assert Reset and Submit enabled","N/A","All form controls visible and interactive","Yes","Pass"
+"TC-F02","Functional","contact-us-functional.spec.ts","valid submission shows thank-you then returns to homepage","Positive","Critical","Contact Us page open","1. Fill valid form
+2. Click Submit
+3. Assert Thank You message
+4. Click Back to Homepage
+5. Assert homepage URL + elements","FN=Automation; LN=Tester; Email=automation.tester@example.com; Comments=Automated Playwright test submission.","Thank You for your Message!; then homepage URL and brand/challenges/Contact Us visible","Yes","Pass"
+"TC-F03","Functional","contact-us-functional.spec.ts","accepts valid equivalence class: hyphenated and apostrophe names","Equivalence","Medium","Contact Us page open","1. Fill form with hyphen/apostrophe names
+2. Submit
+3. Thank-you then Back to Homepage","FN=Mary-Jane; LN=O'Connor; Email=mary.jane+qa@example.com; Comments=Comments with punctuation: OK!","Success then homepage","Yes","Pass"
+"TC-F04","Functional","contact-us-functional.spec.ts","accepts valid equivalence class: Unicode names and comments","Equivalence","Medium","Contact Us page open","1. Fill Unicode names/comments
+2. Submit
+3. Thank-you then Back to Homepage","FN=Jose; LN=Muller; Email=jose.muller@example.com; Comments=Japanese Unicode text","Success then homepage","Yes","Pass"
+"TC-F05","Functional","contact-us-functional.spec.ts","accepts valid equivalence class: multiline comments","Equivalence","Medium","Contact Us page open","1. Fill multiline comments
+2. Submit
+3. Thank-you then Back to Homepage","FN=Line; LN=Break; Email=line.break@example.com; Comments=3 lines","Success then homepage","Yes","Pass"
+"TC-F06","Functional","contact-us-functional.spec.ts","accepts boundary/exploratory length: single character fields","Boundary","Medium","Contact Us page open","1. Fill 1-char / minimal email
+2. Submit
+3. Return home via Back to Homepage","FN=A; LN=B; Email=a@b.co; Comments=C","Success then homepage","Yes","Pass"
+"TC-F07","Functional","contact-us-functional.spec.ts","accepts boundary/exploratory length: long but reasonable comments (~500 chars)","Boundary","Medium","Contact Us page open","1. Submit with ~500 char comments; return home","validContact + comments A x 500","Success then homepage","Yes","Pass"
+"TC-F08","Functional","contact-us-functional.spec.ts","accepts boundary/exploratory length: oversized comments (~2000 chars)","Boundary","Medium","Contact Us page open","1. Submit with ~2000 char comments; return home","validContact + comments B x 2000","Success then homepage","Yes","Pass"
+"TC-V01","Validation","contact-us-validation.spec.ts","required-field rule: all fields empty","Negative","High","Contact Us page open","1. Leave all fields empty
+2. Submit
+3. Assert both errors
+4. Click Home
+5. Assert homepage","All empty","Error: all fields are required + Error: Invalid email address; then homepage","Yes","Pass"
+"TC-V02","Validation","contact-us-validation.spec.ts","required-field rule: missing first name","Negative","High","Contact Us page open","1. Omit first name; submit; Home","validContact with firstName empty","Error: all fields are required only; then homepage","Yes","Pass"
+"TC-V03","Validation","contact-us-validation.spec.ts","required-field rule: missing last name","Negative","High","Contact Us page open","1. Omit last name; submit; Home","validContact with lastName empty","Error: all fields are required only; then homepage","Yes","Pass"
+"TC-V04","Validation","contact-us-validation.spec.ts","required-field rule: missing email","Negative","High","Contact Us page open","1. Omit email; submit; Home","validContact with email empty","Both required + invalid email; then homepage","Yes","Pass"
+"TC-V05","Validation","contact-us-validation.spec.ts","required-field rule: missing comments","Negative","High","Contact Us page open","1. Omit comments; submit; Home","validContact with comments empty","Error: all fields are required only; then homepage","Yes","Pass"
+"TC-V06","Validation","contact-us-validation.spec.ts","invalid email partition: missing @","Negative","High","Contact Us page open","1. Invalid email; submit; Home","Email=automation.testerexample.com","Error: Invalid email address only; then homepage","Yes","Pass"
+"TC-V07","Validation","contact-us-validation.spec.ts","invalid email partition: missing local part","Negative","High","Contact Us page open","1. Invalid email; submit; Home","Email=@example.com","Invalid email only; then homepage","Yes","Pass"
+"TC-V08","Validation","contact-us-validation.spec.ts","invalid email partition: missing domain","Negative","High","Contact Us page open","1. Invalid email; submit; Home","Email=automation.tester@","Invalid email only; then homepage","Yes","Pass"
+"TC-V09","Validation","contact-us-validation.spec.ts","invalid email partition: missing domain suffix","Negative","High","Contact Us page open","1. Invalid email; submit; Home","Email=automation.tester@example","Invalid email only; then homepage","Yes","Pass"
+"TC-V10","Validation","contact-us-validation.spec.ts","invalid email partition: spaces in email","Negative","High","Contact Us page open","1. Invalid email; submit; Home","Email=automation tester@example.com","Invalid email only; then homepage","Yes","Pass"
+"TC-V11","Validation","contact-us-validation.spec.ts","invalid email partition: multiple @","Negative","High","Contact Us page open","1. Invalid email; submit; Home","Email=a@b@example.com","Invalid email only; then homepage","Yes","Pass"
+"TC-V12","Validation","contact-us-validation.spec.ts","whitespace handling: whitespace-only first name","Edge","Medium","Contact Us page open","1. Whitespace-only FN; submit; Home","firstName=spaces only","Required error only; then homepage","Yes","Pass"
+"TC-V13","Validation","contact-us-validation.spec.ts","whitespace handling: whitespace-only comments","Edge","Medium","Contact Us page open","1. Whitespace-only comments; submit; Home","comments=tabs/newlines/spaces","Required error only; then homepage","Yes","Pass"
+"TC-V14","Validation","contact-us-validation.spec.ts","whitespace handling: leading and trailing spaces on valid values","Edge","Medium","Contact Us page open","1. Padded valid values; submit; Back to Homepage","Leading/trailing spaces on all fields","Success (trim); then homepage","Yes","Pass"
+"TC-R01","Reset","contact-us-reset.spec.ts","clears all fields without submitting or navigating away","Functional","High","Contact Us page open","1. Fill all fields
+2. Click Reset
+3. Assert fields empty
+4. Assert still on Contact Us (no thank-you)","validContact then Reset","All fields empty; URL remains contactus.html; no success message","Yes","Pass"
+"TC-R02","Reset","contact-us-reset.spec.ts","after validation error, Home returns to homepage (Reset is gone)","Functional","High","Contact Us page open","1. Submit with blank email
+2. Assert both errors
+3. Assert Reset gone, Try Again visible
+4. Click Home
+5. Assert homepage","validContact with email empty","Error UI; Reset absent; Home navigates to homepage URL + elements","Yes","Pass"
+"TC-S01","Security","contact-us-security.spec.ts","treats HTML-like comments as non-executing form input","Security","High","Contact Us page open; alert probe installed","1. Submit HTML-like comments
+2. Assert success, no script execution/reflection
+3. Back to Homepage","Comments with bold/img onerror markup","Thank you; no XSS execution; homepage after Back","Yes","Pass"
+"TC-S02","Security","contact-us-security.spec.ts","treats XSS-like script in comments as non-executing form input","Security","High","Contact Us page open; alert probe installed","1. Submit script-like comments; assert no execution; Back to Homepage","Comments=<script>window.__xssFired=true</script>","Success; no script execution; homepage","Yes","Pass"
+"TC-S03","Security","contact-us-security.spec.ts","treats SQL-like comments as non-executing form input","Security","Medium","Contact Us page open","1. Submit SQL-like comments; success; Back to Homepage","Comments='; DROP TABLE users; --","Treated as text; success; homepage","Yes","Pass"
+"TC-S04","Security","contact-us-security.spec.ts","treats special characters across fields as non-executing form input","Security","Medium","Contact Us page open","1. Submit special chars; success; Back to Homepage","FN/LN/Comments with <>&\"" special chars","Success; no execution; homepage","Yes","Pass"
+"TC-S05","Security","contact-us-security.spec.ts","treats URL and protocol-looking comments as non-executing form input","Security","Medium","Contact Us page open","1. Submit URL/javascript: text; success; Back to Homepage","Comments=https://example.com javascript:alert(1)","Success; no execution; homepage","Yes","Pass"
+"TC-S06","Security","contact-us-security.spec.ts","XSS-like first name that still validates does not execute","Security","High","Contact Us page open; alert probe installed","1. Script-like first name; submit; assert no alert; Back to Homepage","FN=<script>alert(1)</script>; Email=xss.probe@example.com","Success; no script execution; homepage","Yes","Pass"

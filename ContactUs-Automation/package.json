@@ -1,0 +1,22 @@
+{
+  "name": "contactus-automation",
+  "version": "1.0.0",
+  "description": "Playwright automation for WebDriverUniversity Contact Us feature",
+  "scripts": {
+    "test": "playwright test",
+    "test:chromium": "playwright test --project=chromium",
+    "test:edge": "playwright test --project=msedge",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "report": "playwright show-report"
+  },
+  "keywords": ["playwright", "contact-us", "webdriveruniversity"],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.5.0"
+  }
+}
